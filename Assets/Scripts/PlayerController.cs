@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    #region Constants
-
-    private const float LOOK_SPEED = 10.0f;
-
-    #endregion
-
     #region Properties
 
-    [SerializeField] private float _movementSpeed = 200.0f;
+    [Range(50, 500)] [SerializeField] private uint _movementSpeed = 250;
+    [Range(0f, 30f)] [SerializeField] private uint _lookSpeed = 10;
     [Range(0f, 90f)] [SerializeField] private float _yRotationLimit = 88f;
 
     private Vector2 _rotation = Vector2.zero;
@@ -26,11 +21,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
 
     #endregion
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     private void Update()
@@ -46,8 +36,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // Player look direction
-        var rotX = Input.GetAxis("Mouse X") * LOOK_SPEED;
-        var rotY = Input.GetAxis("Mouse Y") * LOOK_SPEED;
+        var rotX = Input.GetAxis("Mouse X") * _lookSpeed;
+        var rotY = Input.GetAxis("Mouse Y") * _lookSpeed;
 
         _rotation.x += rotX;
         _rotation.y += rotY;
@@ -63,8 +53,8 @@ public class PlayerController : MonoBehaviour
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
 
-        _rigidbody.velocity = transform.TransformDirection(new Vector3(horizontalInput, 0, verticalInput) *
-                                                           (_movementSpeed * Time.fixedDeltaTime));
-        print(1f / Time.fixedDeltaTime);
+        _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y + transform.TransformDirection(
+            new Vector3(horizontalInput, 0, verticalInput) *
+            (_movementSpeed * Time.fixedDeltaTime));
     }
 }

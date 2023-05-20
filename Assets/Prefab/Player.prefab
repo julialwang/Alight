@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 250
+  _lookSpeed: 10
   _yRotationLimit: 88
   _camera: {fileID: 6895517548234331610}
   _rigidbody: {fileID: 283708312907587187}
