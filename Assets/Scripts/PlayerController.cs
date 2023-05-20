@@ -2,16 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
     #region Properties
 
-    [Range(50, 500)] [SerializeField] private uint _movementSpeed = 250;
+    [Range(1, 10)] [SerializeField] private uint _movementSpeed = 5;
     [Range(0f, 30f)] [SerializeField] private uint _lookSpeed = 10;
     [Range(0f, 90f)] [SerializeField] private float _yRotationLimit = 88f;
 
     private Vector2 _rotation = Vector2.zero;
+    
+    public UnityEvent<float> setPlatform;
+    private bool _raised;
 
     #endregion
 
@@ -45,6 +49,13 @@ public class PlayerController : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(_rotation.x, Vector3.up);
         _camera.transform.localRotation = Quaternion.AngleAxis(_rotation.y, Vector3.left);
+        
+        // Test platform
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            setPlatform.Invoke(_raised ? 0 : 5);
+            _raised = !_raised;
+        }
     }
 
     private void FixedUpdate()
@@ -54,7 +65,6 @@ public class PlayerController : MonoBehaviour
         var verticalInput = Input.GetAxis("Vertical");
 
         _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y + transform.TransformDirection(
-            new Vector3(horizontalInput, 0, verticalInput) *
-            (_movementSpeed * Time.fixedDeltaTime));
+            new Vector3(horizontalInput, 0, verticalInput) * _movementSpeed);
     }
 }
