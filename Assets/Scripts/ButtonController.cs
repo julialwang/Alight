@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +6,52 @@ public class ButtonController : MonoBehaviour
     #region Constant
 
     private const float BUTTON_BOTTOM_HEIGHT = -0.06f;
+
+    #endregion
+
+    #region Unity
+
+    private void FixedUpdate()
+    {
+        // Reduce movement speed
+        _buttonRigidbody.velocity = Vector3.ClampMagnitude(_buttonRigidbody.velocity, 0.25f);
+
+        // Edit button position
+        var buttonPosition = _buttonTransform.position;
+
+        switch (buttonPosition.y)
+        {
+            // Button is being pressed downward
+            case < BUTTON_BOTTOM_HEIGHT:
+                buttonPosition.y = BUTTON_BOTTOM_HEIGHT;
+                _buttonTransform.position = buttonPosition;
+                _buttonRigidbody.velocity = Vector3.zero;
+
+                // Handle press event
+                if (!_isPressed)
+                {
+                    _isPressed = true;
+                    buttonPressed.Invoke();
+                }
+
+                break;
+
+            // Button is coming back up
+            case > 0:
+                buttonPosition.y = 0;
+                _buttonTransform.position = buttonPosition;
+                _buttonRigidbody.velocity = Vector3.zero;
+
+                // Handle release event
+                if (_isPressed)
+                {
+                    _isPressed = false;
+                    buttonReleased.Invoke();
+                }
+
+                break;
+        }
+    }
 
     #endregion
 
@@ -26,36 +69,4 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private Rigidbody _buttonRigidbody;
 
     #endregion
-
-    private void FixedUpdate()
-    {
-        _buttonRigidbody.velocity = Vector3.ClampMagnitude(_buttonRigidbody.velocity, 0.25f);
-
-        switch (_buttonTransform.position.y)
-        {
-            case < BUTTON_BOTTOM_HEIGHT:
-                _buttonTransform.position = new Vector3(_buttonTransform.position.x, BUTTON_BOTTOM_HEIGHT,
-                    _buttonTransform.position.z);
-                _buttonRigidbody.velocity = Vector3.zero;
-                
-                // Handle press event
-                if (!_isPressed)
-                {
-                    _isPressed = true;
-                    buttonPressed.Invoke();
-                }
-                break;
-            case > 0:
-                _buttonTransform.position = new Vector3(_buttonTransform.position.x, 0, _buttonTransform.position.z);
-                _buttonRigidbody.velocity = Vector3.zero;
-                
-                // Handle release event
-                if (_isPressed)
-                {
-                    _isPressed = false;
-                    buttonReleased.Invoke();
-                }
-                break;
-        }
-    }
 }

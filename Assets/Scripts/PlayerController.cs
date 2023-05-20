@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 90f)] [SerializeField] private float _yRotationLimit = 88f;
 
     private Vector2 _rotation = Vector2.zero;
-    
+
     #endregion
 
     #region Components
@@ -23,18 +19,15 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Unity
+
     // Update is called once per frame
     private void Update()
     {
         // Locking cursor
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
             Cursor.lockState = CursorLockMode.None;
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+        else if (Input.GetMouseButtonDown(0)) Cursor.lockState = CursorLockMode.Locked;
 
         // Player look direction
         var rotX = Input.GetAxis("Mouse X") * _lookSpeed;
@@ -57,4 +50,6 @@ public class PlayerController : MonoBehaviour
         _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y + transform.TransformDirection(
             new Vector3(horizontalInput, 0, verticalInput) * _movementSpeed);
     }
+
+    #endregion
 }
