@@ -14,9 +14,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 _rotation = Vector2.zero;
     
-    public UnityEvent<float> setPlatform;
-    private bool _raised;
-
     #endregion
 
     #region Components
@@ -49,13 +46,6 @@ public class PlayerController : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(_rotation.x, Vector3.up);
         _camera.transform.localRotation = Quaternion.AngleAxis(_rotation.y, Vector3.left);
-        
-        // Test platform
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            setPlatform.Invoke(_raised ? 0 : 5);
-            _raised = !_raised;
-        }
     }
 
     private void FixedUpdate()
