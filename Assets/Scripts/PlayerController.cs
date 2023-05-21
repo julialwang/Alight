@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Range(1, 10)][SerializeField] private uint _movementSpeed = 5;
     [Range(0f, 30f)][SerializeField] private uint _lookSpeed = 10;
     [Range(0f, 90f)][SerializeField] private float _yRotationLimit = 88f;
-    private uint _jumpHeight = 50;
+    private uint _jumpHeight = 12;
 
     private bool canJump = false;
 
