@@ -51,17 +51,23 @@ public class LaserController : MonoBehaviour
         Quaternion rotation_pos = _transform.rotation;
         Vector3 direction = transform.TransformDirection(Vector3.right);
 
+        // Ignore layer 2
+        int layerMask = ~(1 << 2);
+
         RaycastHit hit;
         float new_x;
-        if (Physics.Raycast(start_point, direction, out hit, Mathf.Infinity)) {
+        if (Physics.Raycast(start_point, direction, out hit, Mathf.Infinity, layerMask)) {
             new_x = hit.distance / (_transform.lossyScale.x / _transform.localScale.x);
         } else {
             new_x = 10000000;
         }
 
+        //if (Mathf.Abs(new_x - _transform.localScale.x) > 0.05f) {
+        //    Debug.Log(new_x);
         _transform.localScale = new Vector3(new_x,
                                             _transform.localScale.y,
                                             _transform.localScale.z);
+        //}
     }
 
     #endregion
