@@ -7,4 +7,5 @@ Heavily inspired by the mechanics in Portal and Fireboy & Watergirl
 
 # Development Setup
 - Unity 2021.3.25 LTS
+- Blender 3.5.1
 - Code editor of choice (VSCode, Visual Studio, Rider, etc.)
