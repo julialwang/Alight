@@ -7,9 +7,7 @@ public class PlayerController : MonoBehaviour
     [Range(1, 10)][SerializeField] private uint _movementSpeed = 5;
     [Range(0f, 30f)][SerializeField] private uint _lookSpeed = 10;
     [Range(0f, 90f)][SerializeField] private float _yRotationLimit = 88f;
-    private uint _jumpHeight = 12;
-
-    private bool canJump = false;
+    private uint _jumpHeight = 50;
 
     private Vector2 _rotation = Vector2.zero;
 
@@ -44,27 +42,28 @@ public class PlayerController : MonoBehaviour
         _camera.transform.localRotation = Quaternion.AngleAxis(_rotation.y, Vector3.left);
 
         // Player jump registration
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
-            canJump = true;
+            _rigidbody.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
         }
     }
 
     private void FixedUpdate()
     {
-        // Player jump
-        if (canJump)
-        {
-            canJump = false;
-            _rigidbody.AddForce(0, _jumpHeight, 0, ForceMode.Impulse);
-        }
-
         // Player movement
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
 
         _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y + transform.TransformDirection(
             new Vector3(horizontalInput, 0, verticalInput) * _movementSpeed);
+    }
+
+    private bool IsGrounded()
+    {
+        float raycastDistance = 0.2f;
+        RaycastHit hit;
+        Vector3 raycastOrigin = transform.position + (Vector3.up * 0.1f); // Offset the raycast origin slightly above the player's position
+        return Physics.Raycast(raycastOrigin, Vector3.down, out hit, raycastDistance);
     }
 
     #endregion
