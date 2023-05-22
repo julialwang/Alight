@@ -1,3 +1,4 @@
+using System;
 using UnityEditor.Build;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     #region Properties
 
-    [Range(1, 10)] [SerializeField] private uint _movementSpeed = 5;
+    [Range(1, 100)] [SerializeField] private uint _movementSpeed = 10;
     [Range(0f, 30f)] [SerializeField] private uint _lookSpeed = 10;
     [Range(0f, 90f)] [SerializeField] private float _yRotationLimit = 88f;
     [Range(0f, 50f)] [SerializeField] private uint _jumpHeight = 12;
@@ -42,18 +43,19 @@ public class PlayerController : MonoBehaviour
         transform.localRotation = Quaternion.AngleAxis(_rotation.x, Vector3.up);
         _camera.transform.localRotation = Quaternion.AngleAxis(_rotation.y, Vector3.left);
 
+    }
+
+    private void LateUpdate()
+    {
+        // Player movement
+        var horizontalInput = Input.GetAxis("Horizontal");
+        var verticalInput = Input.GetAxis("Vertical");
+        
         // Player jump registration
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
         }
-    }
-
-    private void FixedUpdate()
-    {
-        // Player movement
-        var horizontalInput = Input.GetAxis("Horizontal");
-        var verticalInput = Input.GetAxis("Vertical");
 
         _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y + transform.TransformDirection(
             new Vector3(horizontalInput, 0, verticalInput) * _movementSpeed);

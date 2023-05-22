@@ -440,10 +440,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 283708312907587187, guid: 07e4b59b42e4a4f9ca83264db7badd66,
+        type: 3}
+      propertyPath: m_Drag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
+        type: 3}
+      propertyPath: _jumpHeight
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
       propertyPath: _movementSpeed
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6895517547980032254, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
