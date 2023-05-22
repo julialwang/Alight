@@ -73,8 +73,7 @@ public class LaserController : MonoBehaviour
             new_x = 10000000;
         }
 
-        //if (Mathf.Abs(new_x - _transform.localScale.x) > 0.05f) {
-        //    Debug.Log(new_x);
+
         _transform.localScale = new Vector3(new_x,
                                             _transform.localScale.y,
                                             _transform.localScale.z);
