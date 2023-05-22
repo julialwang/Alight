@@ -5,10 +5,11 @@ public class PlayerController : MonoBehaviour
 {
     #region Properties
 
-    [Range(1, 10)] [SerializeField] private uint _movementSpeed = 5;
+    [SerializeField] private float _movementForce = 4000;
+    [SerializeField] private float _maxMovementSpeed = 400;
+    [SerializeField] private uint _jumpForce = 300;
     [Range(0f, 30f)] [SerializeField] private uint _lookSpeed = 10;
     [Range(0f, 90f)] [SerializeField] private float _yRotationLimit = 88f;
-    [Range(0f, 50f)] [SerializeField] private uint _jumpHeight = 12;
 
     private Vector2 _rotation = Vector2.zero;
 
@@ -41,11 +42,11 @@ public class PlayerController : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(_rotation.x, Vector3.up);
         _camera.transform.localRotation = Quaternion.AngleAxis(_rotation.y, Vector3.left);
-
+        
         // Player jump registration
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
-            _rigidbody.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
+            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
 
@@ -55,8 +56,10 @@ public class PlayerController : MonoBehaviour
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
 
-        _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y + transform.TransformDirection(
-            new Vector3(horizontalInput, 0, verticalInput) * _movementSpeed);
+        _rigidbody.AddRelativeForce(new Vector3(horizontalInput, 0, verticalInput) * _movementForce);
+        var rigidbodyVelocity = _rigidbody.velocity;
+        var lateralVelocity = new Vector3(rigidbodyVelocity.x, 0, rigidbodyVelocity.z);
+        _rigidbody.AddForce(-lateralVelocity * (_movementForce / _maxMovementSpeed), ForceMode.Acceleration);
     }
 
     private bool IsGrounded()
