@@ -48,12 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4100b81737e2943b485f1c577f188d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 250
+  _movementSpeed: 5
   _lookSpeed: 10
   _yRotationLimit: 88
-  setPlatform:
-    m_PersistentCalls:
-      m_Calls: []
   _camera: {fileID: 6895517548234331610}
   _rigidbody: {fileID: 283708312907587187}
 --- !u!54 &283708312907587187

@@ -11,6 +11,10 @@ public class PlatformController : MonoBehaviour
 
     #region Unity
 
+    private void Start() {
+        _targetY = transform.position.y;
+    }
+
     private void FixedUpdate()
     {
         // Check if at target, snap to target
