@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1889,7 +1889,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644751155}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 68772b7dc35c3413782a4a5445dc14ba, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -1903,6 +1903,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1535065030}
     m_Modifications:
+    - target: {fileID: 1794133820813080438, guid: 07e4b59b42e4a4f9ca83264db7badd66,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 68772b7dc35c3413782a4a5445dc14ba,
+        type: 2}
     - target: {fileID: 6895517547980032254, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
       propertyPath: m_Name
@@ -1921,7 +1927,7 @@ PrefabInstance:
     - target: {fileID: 6895517547980032255, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.260974
+      value: -11.21
       objectReference: {fileID: 0}
     - target: {fileID: 6895517547980032255, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
@@ -1966,12 +1972,12 @@ PrefabInstance:
     - target: {fileID: 6895517548047197723, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.62
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6895517548047197723, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.31
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e4b59b42e4a4f9ca83264db7badd66, type: 3}
