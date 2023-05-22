@@ -1,13 +1,14 @@
+using UnityEditor.Build;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     #region Properties
 
-    [Range(1, 10)][SerializeField] private uint _movementSpeed = 5;
-    [Range(0f, 30f)][SerializeField] private uint _lookSpeed = 10;
-    [Range(0f, 90f)][SerializeField] private float _yRotationLimit = 88f;
-    private uint _jumpHeight = 50;
+    [Range(1, 10)] [SerializeField] private uint _movementSpeed = 5;
+    [Range(0f, 30f)] [SerializeField] private uint _lookSpeed = 10;
+    [Range(0f, 90f)] [SerializeField] private float _yRotationLimit = 88f;
+    [Range(0f, 50f)] [SerializeField] private uint _jumpHeight = 12;
 
     private Vector2 _rotation = Vector2.zero;
 
@@ -60,10 +61,10 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        float raycastDistance = 0.2f;
-        RaycastHit hit;
-        Vector3 raycastOrigin = transform.position + (Vector3.up * 0.1f); // Offset the raycast origin slightly above the player's position
-        return Physics.Raycast(raycastOrigin, Vector3.down, out hit, raycastDistance);
+        const float raycastDistance = 0.2f;
+        var raycastOrigin =
+            transform.position + (Vector3.up * 0.1f); // Offset the raycast origin slightly above the player's position
+        return Physics.Raycast(raycastOrigin, Vector3.down, out _, raycastDistance);
     }
 
     #endregion
