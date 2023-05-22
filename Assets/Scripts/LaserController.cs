@@ -5,8 +5,11 @@ using UnityEngine;
 public class LaserController : MonoBehaviour
 {
     #region Properties
-    Vector3 prev_pos;
-    Quaternion prev_rot;
+    private Vector3 prev_pos;
+    private Quaternion prev_rot;
+
+    [SerializeField] private bool shoot_laser = true;
+
     #endregion
 
     #region Components
@@ -43,6 +46,14 @@ public class LaserController : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         raycast();
+    }
+
+    void turnOn() {
+        shoot_laser = true;
+    }
+
+    void turnOf() {
+        shoot_laser = false;
     }
 
     private void raycast()
