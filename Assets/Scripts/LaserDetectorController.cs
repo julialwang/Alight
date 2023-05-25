@@ -26,7 +26,6 @@ public class LaserDetectorController : MonoBehaviour
     {
         if (other.gameObject.tag == "Laser") {
             _isLasered -= 1;
-            Debug.Log(_isLasered);
             if (_isLasered == 0) {
                 laserLeave.Invoke();
             }
