@@ -8,11 +8,14 @@ public class PlatformController : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
 
     #endregion
+    public AudioClip platformMovement;
+    private AudioSource audioSource;
 
     #region Unity
 
     private void Start() {
         _targetY = transform.position.y;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -28,10 +31,13 @@ public class PlatformController : MonoBehaviour
         else
         {
             // Move towards target
-            if (transform.position.y < _targetY)
+            if (transform.position.y < _targetY) {
                 _rigidbody.MovePosition(transform.position + Vector3.up * (_movementSpeed * Time.fixedDeltaTime));
-            else
+                audioSource.PlayOneShot(platformMovement, 0.9f);
+            } else {
                 _rigidbody.MovePosition(transform.position + Vector3.down * (_movementSpeed * Time.fixedDeltaTime));
+                audioSource.PlayOneShot(platformMovement, 0.9f);
+            }
         }
     }
 
