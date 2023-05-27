@@ -19,8 +19,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
 
     #endregion
+    public AudioClip jump;
+    private AudioSource audioSource;
 
     #region Unity
+
+    void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     private void Update()
@@ -45,6 +51,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
+            audioSource.PlayOneShot(jump, 0.9f);
         }
     }
 
