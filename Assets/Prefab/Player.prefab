@@ -55,6 +55,7 @@ MonoBehaviour:
   _camera: {fileID: 6895517548234331610}
   _rigidbody: {fileID: 283708312907587187}
   jump: {fileID: 8300000, guid: 8a23a0eab4da81f4485aa826aeb9ef7b, type: 3}
+  walk: {fileID: 8300000, guid: 7b111c6be87071b4aa115a494475ff2b, type: 3}
 --- !u!54 &283708312907587187
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94,7 +95,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8a23a0eab4da81f4485aa826aeb9ef7b, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

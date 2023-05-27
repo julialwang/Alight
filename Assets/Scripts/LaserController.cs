@@ -17,7 +17,7 @@ public class LaserController : MonoBehaviour
     [SerializeField] private Transform _transform;
     public AudioClip powerOn;
     public AudioClip powerOff;
-    private AudioSource source;
+    private AudioSource audioSource;
 
     #endregion
 
@@ -29,7 +29,7 @@ public class LaserController : MonoBehaviour
         raycast();
         prev_pos = _transform.position;
         prev_rot = _transform.rotation;
-        source = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -54,12 +54,12 @@ public class LaserController : MonoBehaviour
 
     void turnOn() {
         shoot_laser = true;
-        source.PlayOneShot(powerOn, 1);
+        audioSource.PlayOneShot(powerOn, 0.9f);
     }
 
     void turnOf() {
         shoot_laser = false;
-        source.PlayOneShot(powerOff, 1);
+        audioSource.PlayOneShot(powerOff, 0.9f);
     }
 
     private void raycast()

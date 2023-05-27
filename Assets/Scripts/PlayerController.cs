@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Range(1, 10)][SerializeField] private uint _movementSpeed = 5;
     [Range(0f, 30f)][SerializeField] private uint _lookSpeed = 10;
     [Range(0f, 90f)][SerializeField] private float _yRotationLimit = 88f;
-    private uint _jumpHeight = 50;
+    private uint _jumpHeight = 12;
 
     private Vector2 _rotation = Vector2.zero;
 
@@ -20,12 +20,16 @@ public class PlayerController : MonoBehaviour
 
     #endregion
     public AudioClip jump;
+    public AudioClip walk;
     private AudioSource audioSource;
+    private bool isJumping;
+    private bool isWalking;
 
     #region Unity
 
     void Start() {
         audioSource = GetComponent<AudioSource>();
+        isWalking = false;
     }
 
     // Update is called once per frame
@@ -51,7 +55,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
+            isJumping = true;
             audioSource.PlayOneShot(jump, 0.9f);
+            isJumping = false;
         }
     }
 
@@ -61,8 +67,17 @@ public class PlayerController : MonoBehaviour
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
 
-        _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y + transform.TransformDirection(
+        if (horizontalInput != 0 | verticalInput != 0) {
+            isWalking = true;
+            _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y + transform.TransformDirection(
             new Vector3(horizontalInput, 0, verticalInput) * _movementSpeed);
+        } else {
+            isWalking = false;
+        }
+
+        if (isWalking && !audioSource.isPlaying) {
+            audioSource.PlayOneShot(walk, 0.7f);
+        }
     }
 
     private bool IsGrounded()
