@@ -136,13 +136,16 @@ public class LaserController : MonoBehaviour
             if (!in_object) {
                 T = Reflect(N, -orig_direction);
                 p = hit.point - orig_direction.normalized/100;
-                if (depth == 0) {
-                    Debug.Log((T, orig_direction, N));
-                }
                 shoot(hit.point, T, depth+1, in_object);
             }
-
+        } else if (target.name == "ReflectPlane") {
+            Vector3 p = hit.point + orig_direction.normalized/100;
+            Vector3 N = hit.normal;
+            Vector3 T = Reflect(N, -orig_direction);
+            p = hit.point - orig_direction.normalized/100;
+            shoot(hit.point, T, depth+1, in_object);
         }
+
     }
 
     private void shoot(Vector3 start_point, Vector3 direction, int depth = 0, bool in_object = false) {
