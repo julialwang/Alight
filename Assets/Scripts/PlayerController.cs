@@ -55,9 +55,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
-            isJumping = true;
-            audioSource.PlayOneShot(jump, 0.9f);
-            isJumping = false;
+            audioSource.PlayOneShot(jump, 0.7f);
         }
     }
 

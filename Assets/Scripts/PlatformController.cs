@@ -33,10 +33,10 @@ public class PlatformController : MonoBehaviour
             // Move towards target
             if (transform.position.y < _targetY) {
                 _rigidbody.MovePosition(transform.position + Vector3.up * (_movementSpeed * Time.fixedDeltaTime));
-                audioSource.PlayOneShot(platformMovement, 0.9f);
+                audioSource.PlayOneShot(platformMovement, 0.7f);
             } else {
                 _rigidbody.MovePosition(transform.position + Vector3.down * (_movementSpeed * Time.fixedDeltaTime));
-                audioSource.PlayOneShot(platformMovement, 0.9f);
+                audioSource.PlayOneShot(platformMovement, 0.7f);
             }
         }
     }

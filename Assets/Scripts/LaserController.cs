@@ -54,12 +54,12 @@ public class LaserController : MonoBehaviour
 
     void turnOn() {
         shoot_laser = true;
-        audioSource.PlayOneShot(powerOn, 0.9f);
+        audioSource.PlayOneShot(powerOn, 0.6f);
     }
 
     void turnOf() {
         shoot_laser = false;
-        audioSource.PlayOneShot(powerOff, 0.9f);
+        audioSource.PlayOneShot(powerOff, 0.6f);
     }
 
     private void raycast()

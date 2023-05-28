@@ -784,6 +784,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2118349029952662561, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118349029952662561, guid: 07e4b59b42e4a4f9ca83264db7badd66,
+        type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -796,7 +801,7 @@ PrefabInstance:
         type: 3}
       propertyPath: walk
       value: 
-      objectReference: {fileID: 8300000, guid: 7b111c6be87071b4aa115a494475ff2b, type: 3}
+      objectReference: {fileID: 8300000, guid: 14d593ef470555140a9976af1a5d64dc, type: 3}
     - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
       propertyPath: _movementSpeed
