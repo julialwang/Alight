@@ -35,12 +35,17 @@ public class LaserController : MonoBehaviour
             int layerMask = ~(1 << 2);
 
             RaycastHit hit;
-            float new_x;
             if (Physics.Raycast(start_point, direction, out hit, Mathf.Infinity, layerMask)) {
                 Vector3 end_point = hit.point;
                 DrawLine(start_point, end_point, Color.white);
+                GameObject target = hit.collider.transform.gameObject;
+                if (target.name == "Laser ColliderActual") {
+                    LaserDetectorController script = target.GetComponent<LaserDetectorController>();
+                    script.laserHitMe();
+              }
             } else {
-                new_x = 10000000;
+                Vector3 new_end = start_point + direction * 10000;
+                DrawLine(start_point, new_end, Color.white);
             }
         }
     }
@@ -61,8 +66,10 @@ public class LaserController : MonoBehaviour
             laser.AddComponent<LineRenderer>();
             LineRenderer line = laser.GetComponent<LineRenderer>();
             line.material = laser_mat;
-            line.SetColors(color, color);
-            line.SetWidth(0.1f, 0.1f);
+            line.startColor = color;
+            line.endColor = color;
+            line.startWidth = 0.1f;
+            line.endWidth = 0.1f;
             line.SetPosition(0, start);
             line.SetPosition(1, end);
             cur_laser = laser;
