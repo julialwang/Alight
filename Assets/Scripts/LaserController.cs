@@ -12,6 +12,7 @@ public class LaserController : MonoBehaviour
     #region Properties
 
     [SerializeField] private bool shoot_laser = true;
+    [SerializeField] private float laser_width = 0.1f;
     [Range(1, 10)][SerializeField] private uint _maxDepth = 5;
 
     #endregion
@@ -91,8 +92,8 @@ public class LaserController : MonoBehaviour
             line.material = laser_mat;
             line.startColor = color;
             line.endColor = color;
-            line.startWidth = 0.1f;
-            line.endWidth = 0.1f;
+            line.startWidth = laser_width;
+            line.endWidth = laser_width;
             line.SetPosition(0, start);
             line.SetPosition(1, end);
             cur_lasers.Add(laser);
