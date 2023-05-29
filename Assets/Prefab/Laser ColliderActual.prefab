@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4755458384922404725}
   - component: {fileID: 4755458384922404724}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: LaserDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
