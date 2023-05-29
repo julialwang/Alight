@@ -13,6 +13,8 @@ public class PlatformController : MonoBehaviour
 
     private void Start() {
         _targetY = transform.position.y;
+        _curRot = 0;
+        _targetRot = 0;
     }
 
     private void FixedUpdate()
@@ -33,6 +35,19 @@ public class PlatformController : MonoBehaviour
             else
                 _rigidbody.MovePosition(transform.position + Vector3.down * (_movementSpeed * Time.fixedDeltaTime));
         }
+
+        if (_curRot != _targetRot) {
+            Quaternion dR;
+            // Move towards target
+            if (_curRot < _targetRot) {
+                dR = Quaternion.Euler(Vector3.up * (_rotationSpeed * Time.fixedDeltaTime));
+                _curRot++;
+            } else {
+                dR = Quaternion.Euler(Vector3.down * (_rotationSpeed * Time.fixedDeltaTime));
+                _curRot--;
+            }
+            _rigidbody.MoveRotation(_rigidbody.rotation * dR);
+        }
     }
 
     #endregion
@@ -44,12 +59,20 @@ public class PlatformController : MonoBehaviour
         _targetY = targetY;
     }
 
+    public void SetTargetRot(int rotationAmount) {
+        _targetRot = rotationAmount;
+    }
+
+
     #endregion
 
     #region Properties
 
     [SerializeField] private float _movementSpeed = 5;
+    [SerializeField] private float _rotationSpeed = 30;
     private float _targetY;
+    private int _targetRot;
+    private int _curRot;
 
     #endregion
 }

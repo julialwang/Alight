@@ -20,11 +20,13 @@ public class LaserController : MonoBehaviour
 
     [SerializeField] private Transform _transform;
     [SerializeField] private Material laser_mat;
+
     private List<GameObject> cur_lasers;
 
     #endregion
 
     #region Unity
+
 
     private void Start()
     {
@@ -165,7 +167,5 @@ public class LaserController : MonoBehaviour
             DrawLine(start_point, new_end, Color.white);
         }
     }
-
-
     #endregion
 }
