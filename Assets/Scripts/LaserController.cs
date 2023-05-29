@@ -5,8 +5,6 @@ using UnityEngine;
 public class LaserController : MonoBehaviour
 {
     #region Properties
-    private Vector3 prev_pos;
-    private Quaternion prev_rot;
 
     [SerializeField] private bool shoot_laser = true;
 
@@ -15,6 +13,9 @@ public class LaserController : MonoBehaviour
     #region Components
 
     [SerializeField] private Transform _transform;
+    [SerializeField] private Material laser_mat;
+    private GameObject cur_laser;
+    
     public AudioClip powerOn;
     public AudioClip powerOff;
     private AudioSource audioSource;
@@ -26,30 +27,37 @@ public class LaserController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        raycast();
-        prev_pos = _transform.position;
-        prev_rot = _transform.rotation;
         audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
     {
         // Check if at target, snap to target
-        var position = _transform.position;
-        var rotation = _transform.rotation;
-        if (prev_pos != position || prev_rot != rotation) {
-            raycast();
+        if (cur_laser) {
+             GameObject.Destroy(cur_laser);
         }
-    }
+        if (shoot_laser) {
+            Vector3 start_point = _transform.position;
+            Quaternion rotation_pos = _transform.rotation;
+            Vector3 direction = transform.TransformDirection(Vector3.right);
 
-    void OnTriggerEnter(Collider other)
-    {
-        raycast();
-    }
+            // Ignore layer 2
+            int layerMask = ~(1 << 2);
 
-    void OnTriggerExit(Collider other)
-    {
-        raycast();
+            RaycastHit hit;
+            if (Physics.Raycast(start_point, direction, out hit, Mathf.Infinity, layerMask)) {
+                Vector3 end_point = hit.point;
+                DrawLine(start_point, end_point, Color.white);
+                GameObject target = hit.collider.transform.gameObject;
+                if (target.name == "Laser ColliderActual") {
+                    LaserDetectorController script = target.GetComponent<LaserDetectorController>();
+                    script.laserHitMe();
+              }
+            } else {
+                Vector3 new_end = start_point + direction * 10000;
+                DrawLine(start_point, new_end, Color.white);
+            }
+        }
     }
 
     void turnOn() {
@@ -62,29 +70,21 @@ public class LaserController : MonoBehaviour
         audioSource.PlayOneShot(powerOff, 0.6f);
     }
 
-    private void raycast()
-    {
-        Vector3 start_point = _transform.position;
-        Quaternion rotation_pos = _transform.rotation;
-        Vector3 direction = transform.TransformDirection(Vector3.right);
+    void DrawLine(Vector3 start, Vector3 end, Color color)
+         {
 
-        // Ignore layer 2
-        int layerMask = ~(1 << 2);
-
-        RaycastHit hit;
-        float new_x;
-        if (Physics.Raycast(start_point, direction, out hit, Mathf.Infinity, layerMask)) {
-            new_x = hit.distance / (_transform.lossyScale.x / _transform.localScale.x);
-        } else {
-            new_x = 10000000;
-        }
-
-
-        _transform.localScale = new Vector3(new_x,
-                                            _transform.localScale.y,
-                                            _transform.localScale.z);
-        //}
-    }
-
+            GameObject laser = new GameObject();
+            laser.transform.position = start;
+            laser.AddComponent<LineRenderer>();
+            LineRenderer line = laser.GetComponent<LineRenderer>();
+            line.material = laser_mat;
+            line.startColor = color;
+            line.endColor = color;
+            line.startWidth = 0.1f;
+            line.endWidth = 0.1f;
+            line.SetPosition(0, start);
+            line.SetPosition(1, end);
+            cur_laser = laser;
+         }
     #endregion
 }

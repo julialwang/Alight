@@ -7,30 +7,26 @@ public class LaserDetectorController : MonoBehaviour
 {
      #region Properties
 
-    private int _isLasered = 0;
+    private int _laserCountdown = 0;
     public UnityEvent laserHit;
     public UnityEvent laserLeave;
 
     #endregion
-     void OnTriggerEnter(Collider other)
+    public void laserHitMe()
     {
-        if (other.gameObject.tag == "Laser") {
-            if (_isLasered == 0) {
-                laserHit.Invoke();
-            }
-            _isLasered += 1;
+        if (_laserCountdown < 2) {
+            laserHit.Invoke();
         }
+        _laserCountdown = 0;
     }
 
-    void OnTriggerExit(Collider other)
+    private void FixedUpdate()
     {
-        if (other.gameObject.tag == "Laser") {
-            _isLasered -= 1;
-            Debug.Log(_isLasered);
-            if (_isLasered == 0) {
-                laserLeave.Invoke();
-            }
+        if (_laserCountdown > 2) {
+            laserLeave.Invoke();
+        } else {
+            _laserCountdown += 1;
         }
-    }
 
+    }
 }

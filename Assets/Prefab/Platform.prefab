@@ -80,6 +80,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 8806744238679623730}
   platformMovement: {fileID: 8300000, guid: b999001c9d09e194c870b45db50ebcd3, type: 3}
   _movementSpeed: 5
+<<<<<<< HEAD
 --- !u!82 &6104159833899070056
 AudioSource:
   m_ObjectHideFlags: 0
@@ -176,6 +177,9 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+=======
+  _rotationSpeed: 50
+>>>>>>> a02c1821e272640811873c26397e6e4ba172977b
 --- !u!1 &8806744239932110986
 GameObject:
   m_ObjectHideFlags: 0
