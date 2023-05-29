@@ -713,6 +713,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 765506950855302363, guid: 12dda2e40b6f94e3cad06640acb44576,
+        type: 3}
+      propertyPath: platformMovement
+      value: 
+      objectReference: {fileID: 8300000, guid: b999001c9d09e194c870b45db50ebcd3, type: 3}
     - target: {fileID: 8806744238679623728, guid: 12dda2e40b6f94e3cad06640acb44576,
         type: 3}
       propertyPath: m_RootOrder
@@ -1101,6 +1106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shoot_laser: 1
   _transform: {fileID: 808897851}
+  laser_mat: {fileID: 0}
   powerOn: {fileID: 8300000, guid: f67da7b483be69b40b6bb6419c33d79d, type: 3}
   powerOff: {fileID: 8300000, guid: fd7eddf43e25e044d9bb7f3bfd5334b8, type: 3}
 --- !u!65 &808897853

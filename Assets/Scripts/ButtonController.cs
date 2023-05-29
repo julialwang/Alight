@@ -8,8 +8,14 @@ public class ButtonController : MonoBehaviour
     private const float BUTTON_BOTTOM_HEIGHT = -0.06f;
 
     #endregion
+    public AudioClip buttonClick;
+    private AudioSource audioSource;
 
     #region Unity
+
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void FixedUpdate()
     {
@@ -31,6 +37,7 @@ public class ButtonController : MonoBehaviour
                 if (!_isPressed)
                 {
                     _isPressed = true;
+                    audioSource.PlayOneShot(buttonClick, 0.7f);
                     buttonPressed.Invoke();
                 }
 
