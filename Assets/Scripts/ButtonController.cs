@@ -11,10 +11,6 @@ public class ButtonController : MonoBehaviour
 
     #region Unity
 
-    private void Start() {
-        audioSource = GetComponent<AudioSource>();
-    }
-
     private void FixedUpdate()
     {
         // Reduce movement speed
@@ -37,7 +33,6 @@ public class ButtonController : MonoBehaviour
                     _isPressed = true;
                     buttonPressed.Invoke();
                 }
-                audioSource.PlayOneShot(buttonClick, 0.7f);
 
                 break;
 
@@ -72,8 +67,6 @@ public class ButtonController : MonoBehaviour
 
     [SerializeField] private Transform _buttonTransform;
     [SerializeField] private Rigidbody _buttonRigidbody;
-    public AudioClip buttonClick;
-    private AudioSource audioSource;
 
     #endregion
 }
