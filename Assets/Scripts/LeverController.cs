@@ -6,6 +6,11 @@ public class LeverController : MonoBehaviour
 
     #region Unity
 
+    private void Start() 
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void FixedUpdate()
     {
         // Reduce movement speed
@@ -13,7 +18,7 @@ public class LeverController : MonoBehaviour
 
         // Edit lever position
         var leverPosition = _leverTransform.localPosition;
-
+        
         if (leverPosition.x < -_lever_width/2) {
                 leverPosition.x = -_lever_width/2;
                 _leverTransform.localPosition = leverPosition;
@@ -25,6 +30,7 @@ public class LeverController : MonoBehaviour
                     _isPressed = true;
                     leverPressed.Invoke();
                 }
+                audioSource.PlayOneShot(leverClick, 0.8f);
             // Button is coming back up
         } else if (leverPosition.x > _lever_width/2) {
                 leverPosition.x = _lever_width/2;
@@ -37,6 +43,7 @@ public class LeverController : MonoBehaviour
                     _isPressed = false;
                     leverReleased.Invoke();
                 }
+                audioSource.PlayOneShot(leverClick, 0.8f);
         }
     }
 
@@ -55,6 +62,8 @@ public class LeverController : MonoBehaviour
     [SerializeField] private Rigidbody _leverRigidbody;
     [SerializeField] private float _lever_width = 1f;
     [SerializeField] private bool _isPressed = false;
+    public AudioClip leverClick;
+    private AudioSource audioSource;
 
     #endregion
 }

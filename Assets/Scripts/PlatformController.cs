@@ -6,10 +6,11 @@ public class PlatformController : MonoBehaviour
     #region Components
 
     [SerializeField] private Rigidbody _rigidbody;
-
-    #endregion
     public AudioClip platformMovement;
     private AudioSource audioSource;
+
+    #endregion
+
 
     #region Unity
 

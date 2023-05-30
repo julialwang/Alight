@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
-            audioSource.PlayOneShot(jump, 0.7f);
+            audioSource.PlayOneShot(jump, 0.075f);
         }
     }
 
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (isWalking && !audioSource.isPlaying) {
-            audioSource.PlayOneShot(walk, 0.7f);
+            audioSource.PlayOneShot(walk, 0.3f);
         }
     }
 

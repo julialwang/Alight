@@ -789,13 +789,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2118349029952662561, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118349029952662561, guid: 07e4b59b42e4a4f9ca83264db7badd66,
+        type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2118349029952662561, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
       propertyPath: m_PlayOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
@@ -1105,6 +1110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shoot_laser: 1
+  laser_width: 0.1
+  _maxDepth: 5
   _transform: {fileID: 808897851}
   laser_mat: {fileID: 0}
   powerOn: {fileID: 8300000, guid: f67da7b483be69b40b6bb6419c33d79d, type: 3}
