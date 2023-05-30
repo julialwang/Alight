@@ -3,7 +3,11 @@ guid: 19e39bf31141bfc4da8054016ec6d053
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _transform: {fileID: 9087377655832941340, guid: fd5b056a58a43db4bb90c5038115ef77,
+      type: 3}
+  - laser_mat: {fileID: 2100000, guid: 33e75441199a92d478a3104fdc135791, type: 2}
+  - colored_mat: {fileID: 2100000, guid: dbd8be84cce654fd782364b802218a23, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
