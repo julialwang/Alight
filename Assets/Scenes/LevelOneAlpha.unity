@@ -2462,16 +2462,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
-        type: 3}
-      propertyPath: _jumpForce
-      value: 250
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 13400000, guid: b38f5952e2f284a24a13930c552b54ac,
+        type: 2}
     - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
       propertyPath: _lookSpeed
-      value: 6
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
+        type: 3}
+      propertyPath: _movementForce
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
+        type: 3}
+      propertyPath: _maxMovementSpeed
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 6895517547980032254, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
