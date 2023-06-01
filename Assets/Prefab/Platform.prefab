@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8806744238679623730}
   - component: {fileID: 765506950855302363}
   - component: {fileID: 2211723859020322945}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 8806744239932110982}
   - component: {fileID: 8806744239932110981}
   - component: {fileID: 8806744239932110980}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: PlatformMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
