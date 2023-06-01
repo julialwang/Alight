@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1266177745374097442}
   - component: {fileID: 1266177745374097441}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,6 +124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e18c308fa392c44b98b4f0565d4cfaef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e18c308fa392c44b98b4f0565d4cfaef, type: 3}
