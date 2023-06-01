@@ -2326,6 +2326,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
+      propertyPath: _jumpForce
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
+        type: 3}
       propertyPath: _lookSpeed
       value: 6
       objectReference: {fileID: 0}
