@@ -690,8 +690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66c466263ec8424cb5a95b700eb7d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splitSide1: {x: 0.5, y: 0.5, z: 0}
-  splitSide2: {x: 0.5, y: 0, z: 0.5}
 --- !u!1 &471398503
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,6 +2288,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: 0cb860733f1fc2f439816d0a8ea72f09, type: 3}
+--- !u!65 &1644751163
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644751155}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.0000005, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.999}
 --- !u!1001 &1658008996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2303,6 +2314,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 13400000, guid: 68772b7dc35c3413782a4a5445dc14ba,
         type: 2}
+    - target: {fileID: 6895517547980032192, guid: 07e4b59b42e4a4f9ca83264db7badd66,
+        type: 3}
+      propertyPath: _lookSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6895517547980032254, guid: 07e4b59b42e4a4f9ca83264db7badd66,
         type: 3}
       propertyPath: m_Name
