@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
 
     #endregion
+
     public AudioClip jump;
     public AudioClip walk;
     private AudioSource audioSource;
@@ -29,7 +30,8 @@ public class PlayerController : MonoBehaviour
 
     #region Unity
 
-    void Start() {
+    void Start()
+    {
         audioSource = GetComponent<AudioSource>();
         isWalking = false;
     }
@@ -52,11 +54,11 @@ public class PlayerController : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(_rotation.x, Vector3.up);
         _camera.transform.localRotation = Quaternion.AngleAxis(_rotation.y, Vector3.left);
-        
+
         // Player jump registration
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
-            _rigidbody.AddForce(Vector3.up * _jumpHeight, ForceMode.Impulse);
+            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             audioSource.PlayOneShot(jump, 0.075f);
         }
     }
@@ -71,9 +73,10 @@ public class PlayerController : MonoBehaviour
         var rigidbodyVelocity = _rigidbody.velocity;
         var lateralVelocity = new Vector3(rigidbodyVelocity.x, 0, rigidbodyVelocity.z);
         _rigidbody.AddForce(-lateralVelocity * (_movementForce / _maxMovementSpeed), ForceMode.Acceleration);
-        
-        if ((horizontalInput != 0 || verticalInput != 0) && !audioSource.isPlaying) {
-            audioSource.PlayOneShot(walk, 0.3f)
+
+        if ((horizontalInput != 0 || verticalInput != 0) && !audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(walk, 0.3f);
         }
     }
 
