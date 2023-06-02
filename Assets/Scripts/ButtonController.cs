@@ -5,7 +5,7 @@ public class ButtonController : MonoBehaviour
 {
     #region Constant
 
-    private const float BUTTON_BOTTOM_HEIGHT = -0.06f;
+    private const float BUTTON_BOTTOM_HEIGHT = -0.04f;
 
     #endregion
 

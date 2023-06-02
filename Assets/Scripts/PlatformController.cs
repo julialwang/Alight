@@ -60,6 +60,7 @@ public class PlatformController : MonoBehaviour
     }
 
     public void SetTargetRot(int rotationAmount) {
+        print("Set rotation"+rotationAmount);
         _targetRot = rotationAmount;
     }
 
