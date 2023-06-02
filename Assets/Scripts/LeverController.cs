@@ -13,7 +13,7 @@ public class LeverController : MonoBehaviour
 
         // Edit lever position
         var leverPosition = _leverTransform.localPosition;
-
+        
         if (leverPosition.x < -_lever_width/2) {
                 leverPosition.x = -_lever_width/2;
                 _leverTransform.localPosition = leverPosition;

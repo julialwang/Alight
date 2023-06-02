@@ -24,6 +24,9 @@ public class LaserController : MonoBehaviour
     [SerializeField] private Material colored_mat;
 
     private List<GameObject> cur_lasers;
+    public AudioClip powerOn;
+    public AudioClip powerOff;
+    private AudioSource audioSource;
 
     #endregion
 
@@ -33,6 +36,7 @@ public class LaserController : MonoBehaviour
     private void Start()
     {
         cur_lasers = new List<GameObject>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -53,10 +57,12 @@ public class LaserController : MonoBehaviour
 
     void turnOn() {
         shoot_laser = true;
+        audioSource.PlayOneShot(powerOn, 0.6f);
     }
 
     void turnOff() {
         shoot_laser = false;
+        audioSource.PlayOneShot(powerOff, 0.6f);
     }
 
     Vector3 Reflect(Vector3 N, Vector3 V) {

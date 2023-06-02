@@ -6,15 +6,19 @@ public class PlatformController : MonoBehaviour
     #region Components
 
     [SerializeField] private Rigidbody _rigidbody;
+    public AudioClip platformMovement;
+    private AudioSource audioSource;
 
     #endregion
+
 
     #region Unity
 
     private void Start() {
         _targetY = transform.position.y;
         _curRot = 0;
-        _targetRot = 0;
+        _targetRot = 0; 
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -30,10 +34,13 @@ public class PlatformController : MonoBehaviour
         else
         {
             // Move towards target
-            if (transform.position.y < _targetY)
+            if (transform.position.y < _targetY) {
                 _rigidbody.MovePosition(transform.position + Vector3.up * (_movementSpeed * Time.fixedDeltaTime));
-            else
+                audioSource.PlayOneShot(platformMovement, 0.7f);
+            } else {
                 _rigidbody.MovePosition(transform.position + Vector3.down * (_movementSpeed * Time.fixedDeltaTime));
+                audioSource.PlayOneShot(platformMovement, 0.7f);
+            }
         }
 
         if (_curRot != _targetRot) {

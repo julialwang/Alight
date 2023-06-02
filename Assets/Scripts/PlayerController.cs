@@ -22,7 +22,19 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    public AudioClip jump;
+    public AudioClip walk;
+    private AudioSource audioSource;
+    private bool isJumping;
+    private bool isWalking;
+
     #region Unity
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        isWalking = false;
+    }
 
     // Update is called once per frame
     private void Update()
@@ -47,6 +59,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            audioSource.PlayOneShot(jump, 0.075f);
         }
     }
 
@@ -60,6 +73,11 @@ public class PlayerController : MonoBehaviour
         var rigidbodyVelocity = _rigidbody.velocity;
         var lateralVelocity = new Vector3(rigidbodyVelocity.x, 0, rigidbodyVelocity.z);
         _rigidbody.AddForce(-lateralVelocity * (_movementForce / _maxMovementSpeed), ForceMode.Acceleration);
+
+        if ((horizontalInput != 0 || verticalInput != 0) && !audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(walk, 0.3f);
+        }
     }
 
     private bool IsGrounded()
