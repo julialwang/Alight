@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Laser
   - Mirror
+  - Green
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Button
+  - World
   - 
   - 
   - 

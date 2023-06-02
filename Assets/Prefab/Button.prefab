@@ -271,6 +271,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e18c308fa392c44b98b4f0565d4cfaef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e18c308fa392c44b98b4f0565d4cfaef, type: 3}
 --- !u!54 &1266177744855888893
@@ -311,7 +316,7 @@ ConstantForce:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113089973789001885}
   m_Enabled: 1
-  m_Force: {x: 0, y: 10, z: 0}
+  m_Force: {x: 0, y: 8, z: 0}
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}

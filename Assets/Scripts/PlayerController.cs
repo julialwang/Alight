@@ -1,13 +1,15 @@
+using UnityEditor.Build;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     #region Properties
 
-    [Range(1, 10)][SerializeField] private uint _movementSpeed = 5;
-    [Range(0f, 30f)][SerializeField] private uint _lookSpeed = 10;
-    [Range(0f, 90f)][SerializeField] private float _yRotationLimit = 88f;
-    private uint _jumpHeight = 12;
+    [SerializeField] private float _movementForce = 4000;
+    [SerializeField] private float _maxMovementSpeed = 400;
+    [SerializeField] private uint _jumpForce = 300;
+    [Range(0f, 30f)] [SerializeField] private uint _lookSpeed = 10;
+    [Range(0f, 90f)] [SerializeField] private float _yRotationLimit = 88f;
 
     private Vector2 _rotation = Vector2.zero;
 
@@ -50,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(_rotation.x, Vector3.up);
         _camera.transform.localRotation = Quaternion.AngleAxis(_rotation.y, Vector3.left);
-
+        
         // Player jump registration
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
@@ -65,25 +67,22 @@ public class PlayerController : MonoBehaviour
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
 
-        if (horizontalInput != 0 | verticalInput != 0) {
-            isWalking = true;
-            _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y + transform.TransformDirection(
-            new Vector3(horizontalInput, 0, verticalInput) * _movementSpeed);
-        } else {
-            isWalking = false;
-        }
-
-        if (isWalking && !audioSource.isPlaying) {
-            audioSource.PlayOneShot(walk, 0.3f);
+        _rigidbody.AddRelativeForce(new Vector3(horizontalInput, 0, verticalInput) * _movementForce);
+        var rigidbodyVelocity = _rigidbody.velocity;
+        var lateralVelocity = new Vector3(rigidbodyVelocity.x, 0, rigidbodyVelocity.z);
+        _rigidbody.AddForce(-lateralVelocity * (_movementForce / _maxMovementSpeed), ForceMode.Acceleration);
+        
+        if ((horizontalInput != 0 || verticalInput != 0) && !audioSource.isPlaying) {
+            audioSource.PlayOneShot(walk, 0.3f)
         }
     }
 
     private bool IsGrounded()
     {
-        float raycastDistance = 0.2f;
-        RaycastHit hit;
-        Vector3 raycastOrigin = transform.position + (Vector3.up * 0.1f); // Offset the raycast origin slightly above the player's position
-        return Physics.Raycast(raycastOrigin, Vector3.down, out hit, raycastDistance);
+        const float raycastDistance = 0.2f;
+        var raycastOrigin =
+            transform.position + (Vector3.up * 0.1f); // Offset the raycast origin slightly above the player's position
+        return Physics.Raycast(raycastOrigin, Vector3.down, out _, raycastDistance);
     }
 
     #endregion
