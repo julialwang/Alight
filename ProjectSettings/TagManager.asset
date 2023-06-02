@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Laser
   - Mirror
+  - Green
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,7 @@ public class LaserController : MonoBehaviour
 
     [SerializeField] private Transform _transform;
     [SerializeField] private Material laser_mat;
+    [SerializeField] private Material colored_mat;
 
     private List<GameObject> cur_lasers;
 
@@ -46,7 +47,7 @@ public class LaserController : MonoBehaviour
         if (shoot_laser) {
             Vector3 start_point = _transform.position;
             Vector3 direction = transform.TransformDirection(Vector3.right);
-            shoot(start_point, direction);
+            shoot(start_point, direction, false);
         }
     }
 
@@ -82,28 +83,31 @@ public class LaserController : MonoBehaviour
         return is_T_valid;
     }
 
-    void DrawLine(Vector3 start, Vector3 end, Color color)
-         {
-
-            GameObject laser = new GameObject();
-            laser.transform.position = start;
-            laser.AddComponent<LineRenderer>();
-            LineRenderer line = laser.GetComponent<LineRenderer>();
+    void DrawLine(Vector3 start, Vector3 end, bool color_change)
+    {
+        GameObject laser = new GameObject();
+        laser.transform.position = start;
+        laser.AddComponent<LineRenderer>();
+        LineRenderer line = laser.GetComponent<LineRenderer>();
+        if (color_change) {
+            line.material = colored_mat;
+            laser_mat = colored_mat;
+        } else {
             line.material = laser_mat;
-            line.startColor = color;
-            line.endColor = color;
-            line.startWidth = laser_width;
-            line.endWidth = laser_width;
-            line.SetPosition(0, start);
-            line.SetPosition(1, end);
-            cur_lasers.Add(laser);
-         }
+        }
+        line.startColor = Color.white;
+        line.endColor = Color.white;
+        line.startWidth = laser_width;
+        line.endWidth = laser_width;
+        line.SetPosition(0, start);
+        line.SetPosition(1, end);
+        cur_lasers.Add(laser);
+    }
 
     private void OnHit(RaycastHit hit, Vector3 orig_direction, int depth, bool in_object = false) {
         GameObject target = hit.collider.transform.gameObject;
         if (target.name == "Laser ColliderActual") {
             LaserDetectorController script = target.GetComponent<LaserDetectorController>();
-            script.laserHitMe();
         }
 
         // if (mirror)
@@ -113,8 +117,8 @@ public class LaserController : MonoBehaviour
             RefractorController script = target.GetComponent<RefractorController>();
             Vector3 p1, p2, d1, d2;
             script.getOutputs(out p1, out d1, out p2, out d2);
-            shoot(p1, d1, depth+1);
-            shoot(p2, d2, depth+1);
+            shoot(p1, d1, false, depth+1);
+            shoot(p2, d2, false, depth+1);
         } else if (target.name == "RefractPlane") {
             Vector3 p = hit.point + orig_direction.normalized/100;
             float rF = (float) Variables.Object(target).Get("refraction_factor");
@@ -133,25 +137,29 @@ public class LaserController : MonoBehaviour
             Vector3 T;
 
             if (Refract(rF, in_object, N, orig_direction, out T)) {
-                shoot(p, T, depth+1, next_in_object);
+                shoot(p, T, false, depth+1, next_in_object);
             }
 
             if (!in_object) {
                 T = Reflect(N, -orig_direction);
                 p = hit.point - orig_direction.normalized/100;
-                shoot(hit.point, T, depth+1, in_object);
+                shoot(hit.point, T, false, depth+1, in_object);
             }
         } else if (target.name == "ReflectPlane") {
             Vector3 p = hit.point + orig_direction.normalized/100;
             Vector3 N = hit.normal;
             Vector3 T = Reflect(N, -orig_direction);
             p = hit.point - orig_direction.normalized/100;
-            shoot(hit.point, T, depth+1, in_object);
+            shoot(hit.point, T, false, depth+1);
+        }
+        else if (target.name == "ColorChange")
+        {
+            shoot(hit.point, orig_direction, true, depth+1, in_object);
         }
 
     }
 
-    private void shoot(Vector3 start_point, Vector3 direction, int depth = 0, bool in_object = false) {
+    private void shoot(Vector3 start_point, Vector3 direction, bool color_change, int depth = 0, bool in_object=false) {
         if (depth > _maxDepth) {
             return;
         }
@@ -161,11 +169,11 @@ public class LaserController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(start_point, direction, out hit, Mathf.Infinity, layerMask)) {
             Vector3 end_point = hit.point;
-            DrawLine(start_point, end_point, Color.white);
+            DrawLine(start_point, end_point, color_change);
             OnHit(hit, direction, depth, in_object = in_object);
         } else {
             Vector3 new_end = start_point + direction * 10000;
-            DrawLine(start_point, new_end, Color.white);
+            DrawLine(start_point, new_end, color_change);
         }
     }
     #endregion
