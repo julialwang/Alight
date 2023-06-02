@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(_rotation.x, Vector3.up);
         _camera.transform.localRotation = Quaternion.AngleAxis(_rotation.y, Vector3.left);
-
+        
         // Player jump registration
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
