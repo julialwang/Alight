@@ -46,8 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shoot_laser: 1
+  laser_width: 0.1
+  _maxDepth: 5
   _transform: {fileID: 9087377655832941340}
   laser_mat: {fileID: 2100000, guid: 33e75441199a92d478a3104fdc135791, type: 2}
+  colored_mat: {fileID: 0}
+  powerOn: {fileID: 0}
+  powerOff: {fileID: 0}
 --- !u!65 &9087377655832941338
 BoxCollider:
   m_ObjectHideFlags: 0

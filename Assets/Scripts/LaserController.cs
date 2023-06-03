@@ -55,12 +55,12 @@ public class LaserController : MonoBehaviour
         }
     }
 
-    void turnOn() {
+    public void turnOn() {
         shoot_laser = true;
         audioSource.PlayOneShot(powerOn, 0.6f);
     }
 
-    void turnOff() {
+    public void turnOff() {
         shoot_laser = false;
         audioSource.PlayOneShot(powerOff, 0.6f);
     }
@@ -114,6 +114,7 @@ public class LaserController : MonoBehaviour
         GameObject target = hit.collider.transform.gameObject;
         if (target.name == "Laser ColliderActual") {
             LaserDetectorController script = target.GetComponent<LaserDetectorController>();
+            script.laserHitMe();
         }
 
         // if (mirror)

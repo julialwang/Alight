@@ -17,7 +17,7 @@ public class PlatformController : MonoBehaviour
     private void Start() {
         _targetY = transform.position.y;
         _curRot = 0;
-        _targetRot = 0; 
+        _targetRot = 0;
         audioSource = GetComponent<AudioSource>();
     }
 
